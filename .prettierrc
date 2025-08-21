@@ -1,6 +1,8 @@
 {
   "plugins": [
-    "prettier-plugin-classnames"
+    "prettier-plugin-tailwindcss",
+    "prettier-plugin-classnames",
+    "prettier-plugin-merge"
   ],
   "htmlWhitespaceSensitivity": "ignore",
   "printWidth": 120,
