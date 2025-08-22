@@ -9,10 +9,5 @@
 }
 
 @theme {
-  --color-temp: #100000;
-}
-
-html,
-body {
-  @apply bg-temp;
+  --color-temp: #FF0000;
 }
