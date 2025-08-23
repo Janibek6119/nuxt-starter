@@ -7,6 +7,11 @@
 
 <script setup lang="ts">
 const layoutStore = useLayoutStore();
+useHead({
+  htmlAttrs: {
+    class: layoutStore.darkMode ? "dark" : "",
+  },
+});
 
 const toggleDarkMode = () => {
   layoutStore.darkMode = !layoutStore.darkMode;
