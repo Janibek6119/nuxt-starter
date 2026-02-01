@@ -5,6 +5,11 @@ export default defineNuxtConfig({
   modules: ["@nuxt/eslint", "@pinia/nuxt", "pinia-plugin-persistedstate/nuxt"],
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  vite: { plugins: [tailwindcss()] },
+  vite: {
+    plugins: [tailwindcss()],
+    optimizeDeps: {
+      noDiscovery: process.env.NODE_ENV === "development", // silence these annoying "Deps optimized!" reloads
+    },
+  },
   css: ["~~/app/assets/css/main.css"],
 });
