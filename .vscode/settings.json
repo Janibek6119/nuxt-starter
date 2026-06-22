@@ -1,3 +1,4 @@
 {
-  "vue.suggest.componentNameCasing": "alwaysPascalCase"
+  "vue.suggest.componentNameCasing": "alwaysPascalCase",
+  "eslint.runtime": "/usr/local/bin/node"
 }
