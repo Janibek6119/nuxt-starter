@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center">
+  <div class="flex-stack items-center">
     <button @click="toggleDarkMode">Toggle Dark Mode: {{ layoutStore.darkMode }}</button>
     <NuxtLink class="underline" to="/about">About</NuxtLink>
   </div>

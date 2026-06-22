@@ -12,4 +12,14 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true,
   },
+  app: {
+    head: {
+      style: [
+        {
+          innerHTML: "@layer theme, base, components, utilities;",
+          tagPriority: -10,
+        },
+      ],
+    },
+  },
 });
