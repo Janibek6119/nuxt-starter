@@ -1,4 +1,7 @@
 {
   "vue.suggest.componentNameCasing": "alwaysPascalCase",
-  "eslint.runtime": "/usr/local/bin/node"
+  "eslint.runtime": "/usr/local/bin/node",
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "less.lint.unknownAtRules": "ignore"
 }

@@ -12,6 +12,7 @@ export default withNuxt(
     },
     files: ["**/*.vue"],
     rules: {
+      "better-tailwindcss/no-unknown-classes": ["warn", { ignore: ["j-*"] }],
       "better-tailwindcss/enforce-consistent-line-wrapping": "off", // conflicts with / covered by prettier-plugin-classnames
       "better-tailwindcss/enforce-consistent-class-order": "off", // conflicts with / covered by prettier-plugin-tailwindcss
     },
