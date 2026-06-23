@@ -8,9 +8,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   vite: {
     plugins: [tailwindcss()],
-    optimizeDeps: {
-      noDiscovery: process.env.NODE_ENV === "development", // silence these annoying "Deps optimized!" reloads
-    },
   },
   css: ["~~/app/assets/css/main.css"],
   primevue: {
@@ -32,5 +29,15 @@ export default defineNuxtConfig({
   },
   typescript: {
     typeCheck: true,
+  },
+  app: {
+    head: {
+      style: [
+        {
+          innerHTML: "@layer theme, base, components, utilities;",
+          tagPriority: -10,
+        },
+      ],
+    },
   },
 });

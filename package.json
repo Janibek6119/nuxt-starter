@@ -14,28 +14,30 @@
   "dependencies": {
     "@pinia/nuxt": "0.11.3",
     "@primeuix/themes": "2.0.3",
-    "@tailwindcss/vite": "4.1.18",
-    "nuxt": "4.3.0",
+    "@tailwindcss/vite": "4.3.1",
+    "nuxt": "4.4.8",
     "pinia": "3.0.4",
     "pinia-plugin-persistedstate": "4.7.1",
     "primeicons": "7.0.0",
-    "primevue": "4.5.4",
-    "tailwindcss": "4.1.18",
+    "primevue": "4.5.5",
+    "tailwindcss": "4.3.1",
     "tailwindcss-primeui": "0.6.1"
   },
   "devDependencies": {
-    "@nuxt/eslint": "1.13.0",
-    "@primevue/nuxt-module": "4.5.4",
+    "@nuxt/eslint": "1.16.0",
+    "@primevue/nuxt-module": "4.5.5",
     "@types/node": "24",
-    "eslint": "9.39.2",
+    "eslint": "10.5.0",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-prettier": "5.5.5",
-    "prettier": "3.8.1",
-    "prettier-plugin-classnames": "0.9.0",
-    "prettier-plugin-merge": "0.9.0",
-    "prettier-plugin-tailwindcss": "0.7.2",
-    "typescript": "5.9.3",
-    "vue-tsc": "3.2.4"
+    "eslint-plugin-better-tailwindcss": "4.6.0",
+    "eslint-plugin-prettier": "5.5.6",
+    "prettier": "3.8.4",
+    "prettier-plugin-classnames": "0.10.2",
+    "prettier-plugin-merge": "0.10.1",
+    "prettier-plugin-tailwindcss": "0.8.0",
+    "typescript": "6.0.3",
+    "vue-eslint-parser": "10.4.1",
+    "vue-tsc": "3.3.5"
   },
-  "packageManager": "yarn@4.12.0+sha512.f45ab632439a67f8bc759bf32ead036a1f413287b9042726b7cc4818b7b49e14e9423ba49b18f9e06ea4941c1ad062385b1d8760a8d5091a1a31e5f6219afca8"
+  "packageManager": "pnpm@11.8.0"
 }

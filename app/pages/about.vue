@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center">
+  <div class="flex-stack items-center">
     <h1>About</h1>
     <PButton
       class="mx-auto mt-8 w-fit"

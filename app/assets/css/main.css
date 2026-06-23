@@ -2,6 +2,7 @@
 @import "tailwindcss-primeui";
 @import "primeicons/primeicons.css";
 
+@custom-variant dark (&:where(.dark, .dark *));
 @utility flex-center {
   @apply flex items-center justify-center;
 }
@@ -10,6 +11,30 @@
   @apply flex items-center;
 }
 
+@utility flex-stack {
+  @apply flex flex-col;
+}
+
 @theme {
-  --color-temp: #FF0000;
+  --color-temp: #ff0000;
+}
+
+html:not(.dark) {
+  background: #dddddd;
+  color: #333333;
+}
+
+html.dark {
+  background: #333333;
+  color: #dddddd;
+}
+
+@layer base {
+  button,
+  a {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: default;
+  }
 }

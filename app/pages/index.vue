@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center">
+  <div class="flex-stack items-center">
     <PButton class="mx-auto mt-8 w-fit" severity="secondary" @click="toggleDarkMode">
       Toggle Dark Mode: {{ layoutStore.darkMode }}
     </PButton>

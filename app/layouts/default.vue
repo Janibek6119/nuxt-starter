@@ -1,6 +1,6 @@
 <template>
-  <div class="flex min-h-screen flex-col gap-6">
-    <BigHello class="flex-center" />
+  <div class="flex-stack min-h-screen gap-6">
+    <JHello class="flex-center" />
     <slot />
   </div>
 </template>
