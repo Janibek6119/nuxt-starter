@@ -13,6 +13,7 @@ Purpose: Putting .ts scripts plain into here dissatisfies TS very much.
 
 Usage: `pnpm tsx scripts/example.ts`
 
-Removal:
+Body:
+
 - [scripts](./scripts) dir
 - `tsx` package in [package.json](./package.json)
