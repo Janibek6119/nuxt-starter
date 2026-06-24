@@ -61,7 +61,7 @@ const props = withDefaults(
     message?: string | null;
     placeholder?: string;
     disabled?: boolean;
-    options: T[];
+    options: T[] | readonly T[];
     optionLabel?: (option: T) => string;
   }>(),
   {

@@ -21,7 +21,7 @@
       </tr>
       <tr v-if="!rows.length" class="j-table__row--empty">
         <td :colspan="columns.length">
-          <slot name="empty">{{ emptyText ?? "Empty" }}</slot>
+          <slot name="empty">{{ emptyText ?? $t("common.empty") }}</slot>
         </td>
       </tr>
     </tbody>

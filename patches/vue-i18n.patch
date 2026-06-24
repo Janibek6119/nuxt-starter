@@ -1,0 +1,544 @@
+diff --git a/dist/vue-i18n.d.ts b/dist/vue-i18n.d.ts
+index c65abbd8e7c98b477a26dcc7ef3ff696c50228c5..07386d9bfe2eca0a9df83b5bb8852ef517fb01df 100644
+--- a/dist/vue-i18n.d.ts
++++ b/dist/vue-i18n.d.ts
+@@ -354,7 +354,7 @@ export declare interface Composer<Messages extends Record<string, any> = {}, Dat
+      */
+     tm<Key extends string, ResourceKeys extends PickupKeys<Messages> = PickupKeys<Messages>, Locale extends PickupLocales<NonNullable<Messages>> = PickupLocales<NonNullable<Messages>>, Target = IsEmptyObject<Messages> extends false ? NonNullable<Messages>[Locale] : RemoveIndexSignature<{
+         [K in keyof DefineLocaleMessage]: DefineLocaleMessage[K];
+-    }>, Return = ResourceKeys extends ResourcePath<Target> ? ResourceValue<Target, ResourceKeys> : Record<string, any>>(key: Key | ResourceKeys): Return;
++    }>, Return = ResourceKeys extends ResourcePath<Target> ? ResourceValue<Target, ResourceKeys> : Record<string, any>>(key: ResourceKeys): Return;
+     /**
+      * Get locale message
+      *
+@@ -592,7 +592,7 @@ export declare interface ComposerDateTimeFormatting<DateTimeFormats extends Reco
+      *
+      * @returns Formatted value
+      */
+-    <Value extends number | Date | string = number, Key extends string = string, OptionsType extends Key | ResourceKeys | DateTimeOptions<Key | ResourceKeys, Locales> = Key | ResourceKeys | DateTimeOptions<Key | ResourceKeys, Locales>>(value: Value, keyOrOptions: OptionsType): IsPart<OptionsType> extends true ? Intl.DateTimeFormatPart[] : string;
++    <Value extends number | Date | string = number, Key extends string = string, OptionsType extends ResourceKeys | DateTimeOptions<ResourceKeys, Locales> = ResourceKeys | DateTimeOptions<ResourceKeys, Locales>>(value: Value, keyOrOptions: OptionsType): IsPart<OptionsType> extends true ? Intl.DateTimeFormatPart[] : string;
+     /**
+      * Datetime formatting
+      *
+@@ -607,7 +607,7 @@ export declare interface ComposerDateTimeFormatting<DateTimeFormats extends Reco
+      *
+      * @returns Formatted value
+      */
+-    <Value extends number | Date | string = number, Key extends string = string, OptionsType extends Key | ResourceKeys | DateTimeOptions<Key | ResourceKeys, Locales> = Key | ResourceKeys | DateTimeOptions<Key | ResourceKeys, Locales>>(value: Value, keyOrOptions: OptionsType, locale: Locales): IsPart<OptionsType> extends true ? Intl.DateTimeFormatPart[] : string;
++    <Value extends number | Date | string = number, Key extends string = string, OptionsType extends ResourceKeys | DateTimeOptions<ResourceKeys, Locales> = ResourceKeys | DateTimeOptions<ResourceKeys, Locales>>(value: Value, keyOrOptions: OptionsType, locale: Locales): IsPart<OptionsType> extends true ? Intl.DateTimeFormatPart[] : string;
+ }
+ 
+ export declare type ComposerExtender = (composer: Composer) => Disposer | undefined;
+@@ -653,7 +653,7 @@ export declare interface ComposerNumberFormatting<NumberFormats extends Record<s
+      *
+      * @returns Formatted value
+      */
+-    <Key extends string = string, OptionsType extends Key | ResourceKeys | NumberOptions<Key | ResourceKeys, Locales> = Key | ResourceKeys | NumberOptions<Key | ResourceKeys, Locales>>(value: number, keyOrOptions: OptionsType): IsPart<OptionsType> extends true ? Intl.NumberFormatPart[] : string;
++    <Key extends string = string, OptionsType extends ResourceKeys | NumberOptions<ResourceKeys, Locales> = ResourceKeys | NumberOptions<ResourceKeys, Locales>>(value: number, keyOrOptions: OptionsType): IsPart<OptionsType> extends true ? Intl.NumberFormatPart[] : string;
+     /**
+      * Number Formatting
+      *
+@@ -668,7 +668,7 @@ export declare interface ComposerNumberFormatting<NumberFormats extends Record<s
+      *
+      * @returns Formatted value
+      */
+-    <Key extends string = string, OptionsType extends Key | ResourceKeys | NumberOptions<Key | ResourceKeys, Locales> = Key | ResourceKeys | NumberOptions<Key | ResourceKeys, Locales>>(value: number, keyOrOptions: OptionsType, locale: Locales): IsPart<OptionsType> extends true ? Intl.NumberFormatPart[] : string;
++    <Key extends string = string, OptionsType extends ResourceKeys | NumberOptions<ResourceKeys, Locales> = ResourceKeys | NumberOptions<ResourceKeys, Locales>>(value: number, keyOrOptions: OptionsType, locale: Locales): IsPart<OptionsType> extends true ? Intl.NumberFormatPart[] : string;
+ }
+ 
+ /**
+@@ -1152,7 +1152,7 @@ export declare interface ComposerTranslation<Messages extends Record<string, any
+      *
+      * @VueI18nSee [Scope and Locale Changing](../guide/essentials/scope)
+      */
+-    <Key extends string>(key: Key | ResourceKeys | number): string;
++    <Key extends string>(key: ResourceKeys | number): string;
+     /**
+      * Locale message translation for plurals
+      *
+@@ -1170,7 +1170,7 @@ export declare interface ComposerTranslation<Messages extends Record<string, any
+      *
+      * @VueI18nSee [Pluralization](../guide/essentials/pluralization)
+      */
+-    <Key extends string>(key: Key | ResourceKeys | number, plural: number): string;
++    <Key extends string>(key: ResourceKeys | number, plural: number): string;
+     /**
+      * Locale message translation for plurals
+      *
+@@ -1191,7 +1191,7 @@ export declare interface ComposerTranslation<Messages extends Record<string, any
+      *
+      * @VueI18nSee [Pluralization](../guide/essentials/pluralization)
+      */
+-    <Key extends string>(key: Key | ResourceKeys | number, plural: number, options: TranslateOptions<Locales>): string;
++    <Key extends string>(key: ResourceKeys | number, plural: number, options: TranslateOptions<Locales>): string;
+     /**
+      * Locale message translation for missing default message
+      *
+@@ -1207,7 +1207,7 @@ export declare interface ComposerTranslation<Messages extends Record<string, any
+      *
+      * @returns Translated message
+      */
+-    <Key extends string>(key: Key | ResourceKeys | number, defaultMsg: string): string;
++    <Key extends string>(key: ResourceKeys | number, defaultMsg: string): string;
+     /**
+      * Locale message translation for missing default message
+      *
+@@ -1226,7 +1226,7 @@ export declare interface ComposerTranslation<Messages extends Record<string, any
+      *
+      * @returns Translated message
+      */
+-    <Key extends string>(key: Key | ResourceKeys | number, defaultMsg: string, options: TranslateOptions<Locales>): string;
++    <Key extends string>(key: ResourceKeys | number, defaultMsg: string, options: TranslateOptions<Locales>): string;
+     /**
+      * Locale message translation for list interpolations
+      *
+@@ -1244,7 +1244,7 @@ export declare interface ComposerTranslation<Messages extends Record<string, any
+      *
+      * @VueI18nSee [List interpolation](../guide/essentials/syntax#list-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys | number, list: unknown[]): string;
++    <Key extends string>(key: ResourceKeys | number, list: unknown[]): string;
+     /**
+      * Locale message translation for list interpolations and plurals
+      *
+@@ -1262,7 +1262,7 @@ export declare interface ComposerTranslation<Messages extends Record<string, any
+      * @VueI18nSee [Pluralization](../guide/essentials/pluralization)
+      * @VueI18nSee [List interpolation](../guide/essentials/syntax#list-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys | number, list: unknown[], plural: number): string;
++    <Key extends string>(key: ResourceKeys | number, list: unknown[], plural: number): string;
+     /**
+      * Locale message translation for list interpolations and missing default message
+      *
+@@ -1279,7 +1279,7 @@ export declare interface ComposerTranslation<Messages extends Record<string, any
+      *
+      * @VueI18nSee [List interpolation](../guide/essentials/syntax#list-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys | number, list: unknown[], defaultMsg: string): string;
++    <Key extends string>(key: ResourceKeys | number, list: unknown[], defaultMsg: string): string;
+     /**
+      * Locale message translation for list interpolations
+      *
+@@ -1300,7 +1300,7 @@ export declare interface ComposerTranslation<Messages extends Record<string, any
+      *
+      * @VueI18nSee [List interpolation](../guide/essentials/syntax#list-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys | number, list: unknown[], options: TranslateOptions<Locales>): string;
++    <Key extends string>(key: ResourceKeys | number, list: unknown[], options: TranslateOptions<Locales>): string;
+     /**
+      * Locale message translation for named interpolations
+      *
+@@ -1318,7 +1318,7 @@ export declare interface ComposerTranslation<Messages extends Record<string, any
+      *
+      * @VueI18nSee [Named interpolation](../guide/essentials/syntax#named-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys | number, named: NamedValue): string;
++    <Key extends string>(key: ResourceKeys | number, named: NamedValue): string;
+     /**
+      * Locale message translation for named interpolations and plurals
+      *
+@@ -1336,7 +1336,7 @@ export declare interface ComposerTranslation<Messages extends Record<string, any
+      * @VueI18nSee [Pluralization](../guide/essentials/pluralization)
+      * @VueI18nSee [Named interpolation](../guide/essentials/syntax#named-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys | number, named: NamedValue, plural: number): string;
++    <Key extends string>(key: ResourceKeys | number, named: NamedValue, plural: number): string;
+     /**
+      * Locale message translation for named interpolations and plurals
+      *
+@@ -1353,7 +1353,7 @@ export declare interface ComposerTranslation<Messages extends Record<string, any
+      *
+      * @VueI18nSee [Named interpolation](../guide/essentials/syntax#named-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys | number, named: NamedValue, defaultMsg: string): string;
++    <Key extends string>(key: ResourceKeys | number, named: NamedValue, defaultMsg: string): string;
+     /**
+      * Locale message translation for named interpolations
+      *
+@@ -1374,7 +1374,7 @@ export declare interface ComposerTranslation<Messages extends Record<string, any
+      *
+      * @VueI18nSee [Named interpolation](../guide/essentials/syntax#named-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys | number, named: NamedValue, options: TranslateOptions<Locales>): string;
++    <Key extends string>(key: ResourceKeys | number, named: NamedValue, options: TranslateOptions<Locales>): string;
+ }
+ 
+ export declare function createI18n<Legacy extends boolean = true, Options extends I18nOptions = I18nOptions, Messages extends Record<string, unknown> = Options['messages'] extends Record<string, unknown> ? Options['messages'] : {}, DateTimeFormats extends Record<string, unknown> = Options['datetimeFormats'] extends Record<string, unknown> ? Options['datetimeFormats'] : {}, NumberFormats extends Record<string, unknown> = Options['numberFormats'] extends Record<string, unknown> ? Options['numberFormats'] : {}, OptionLocale = Options['locale'] extends string ? Options['locale'] : Locale>(options: Options): (typeof options)['legacy'] extends true ? I18n<Messages, DateTimeFormats, NumberFormats, OptionLocale, true> : (typeof options)['legacy'] extends false ? I18n<Messages, DateTimeFormats, NumberFormats, OptionLocale, false> : I18n<Messages, DateTimeFormats, NumberFormats, OptionLocale, Legacy>;
+@@ -2518,7 +2518,7 @@ export declare interface VueI18nDateTimeFormatting<DateTimeFormats extends Recor
+      *
+      * @returns Formatted value
+      */
+-    <Value extends number | Date = number, Key extends string = string>(value: Value, key: Key | ResourceKeys): DateTimeFormatResult;
++    <Value extends number | Date = number, Key extends string = string>(value: Value, key: ResourceKeys): DateTimeFormatResult;
+     /**
+      * Datetime formatting
+      *
+@@ -2531,7 +2531,7 @@ export declare interface VueI18nDateTimeFormatting<DateTimeFormats extends Recor
+      *
+      * @returns Formatted value
+      */
+-    <Value extends number | Date = number, Key extends string = string>(value: Value, key: Key | ResourceKeys, locale: Locales): DateTimeFormatResult;
++    <Value extends number | Date = number, Key extends string = string>(value: Value, key: ResourceKeys, locale: Locales): DateTimeFormatResult;
+     /**
+      * Datetime formatting
+      *
+@@ -2597,7 +2597,7 @@ export declare interface VueI18nNumberFormatting<NumberFormats extends Record<st
+      *
+      * @returns Formatted value
+      */
+-    <Key extends string = string>(value: number, key: Key | ResourceKeys): NumberFormatResult;
++    <Key extends string = string>(value: number, key: ResourceKeys): NumberFormatResult;
+     /**
+      * Number formatting
+      *
+@@ -2610,7 +2610,7 @@ export declare interface VueI18nNumberFormatting<NumberFormats extends Record<st
+      *
+      * @returns Formatted value
+      */
+-    <Key extends string = string>(value: number, key: Key | ResourceKeys, locale: Locales): NumberFormatResult;
++    <Key extends string = string>(value: number, key: ResourceKeys, locale: Locales): NumberFormatResult;
+     /**
+      * Number formatting
+      *
+@@ -2950,7 +2950,7 @@ export declare interface VueI18nTranslation<Messages extends Record<string, any>
+      *
+      * @VueI18nSee [Scope and Locale Changing](../guide/essentials/scope)
+      */
+-    <Key extends string>(key: Key | ResourceKeys): TranslateResult;
++    <Key extends string>(key: ResourceKeys): TranslateResult;
+     /**
+      * Locale message translation for plurals
+      *
+@@ -2968,7 +2968,7 @@ export declare interface VueI18nTranslation<Messages extends Record<string, any>
+      *
+      * @VueI18nSee [Pluralization](../guide/essentials/pluralization)
+      */
+-    <Key extends string>(key: Key | ResourceKeys, plural: number): TranslateResult;
++    <Key extends string>(key: ResourceKeys, plural: number): TranslateResult;
+     /**
+      * Locale message translation for plurals
+      *
+@@ -2989,7 +2989,7 @@ export declare interface VueI18nTranslation<Messages extends Record<string, any>
+      *
+      * @VueI18nSee [Pluralization](../guide/essentials/pluralization)
+      */
+-    <Key extends string>(key: Key | ResourceKeys, plural: number, options: TranslateOptions<Locales>): TranslateResult;
++    <Key extends string>(key: ResourceKeys, plural: number, options: TranslateOptions<Locales>): TranslateResult;
+     /**
+      * Locale message translation for missing default message
+      *
+@@ -3005,7 +3005,7 @@ export declare interface VueI18nTranslation<Messages extends Record<string, any>
+      *
+      * @returns Translated message
+      */
+-    <Key extends string>(key: Key | ResourceKeys, defaultMsg: string): TranslateResult;
++    <Key extends string>(key: ResourceKeys, defaultMsg: string): TranslateResult;
+     /**
+      * Locale message translation for missing default message
+      *
+@@ -3024,7 +3024,7 @@ export declare interface VueI18nTranslation<Messages extends Record<string, any>
+      *
+      * @returns Translated message
+      */
+-    <Key extends string>(key: Key | ResourceKeys, defaultMsg: string, options: TranslateOptions<Locales>): TranslateResult;
++    <Key extends string>(key: ResourceKeys, defaultMsg: string, options: TranslateOptions<Locales>): TranslateResult;
+     /**
+      * Locale message translation.
+      *
+@@ -3038,7 +3038,7 @@ export declare interface VueI18nTranslation<Messages extends Record<string, any>
+      *
+      * @VueI18nSee [List interpolation](../guide/essentials/syntax#list-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys, list: unknown[]): TranslateResult;
++    <Key extends string>(key: ResourceKeys, list: unknown[]): TranslateResult;
+     /**
+      * Locale message translation for list interpolations and plurals
+      *
+@@ -3056,7 +3056,7 @@ export declare interface VueI18nTranslation<Messages extends Record<string, any>
+      * @VueI18nSee [Pluralization](../guide/essentials/pluralization)
+      * @VueI18nSee [List interpolation](../guide/essentials/syntax#list-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys, list: unknown[], plural: number): TranslateResult;
++    <Key extends string>(key: ResourceKeys, list: unknown[], plural: number): TranslateResult;
+     /**
+      * Locale message translation for list interpolations and missing default message
+      *
+@@ -3073,7 +3073,7 @@ export declare interface VueI18nTranslation<Messages extends Record<string, any>
+      *
+      * @VueI18nSee [List interpolation](../guide/essentials/syntax#list-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys, list: unknown[], defaultMsg: string): TranslateResult;
++    <Key extends string>(key: ResourceKeys, list: unknown[], defaultMsg: string): TranslateResult;
+     /**
+      * Locale message translation for list interpolations
+      *
+@@ -3094,7 +3094,7 @@ export declare interface VueI18nTranslation<Messages extends Record<string, any>
+      *
+      * @VueI18nSee [List interpolation](../guide/essentials/syntax#list-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys, list: unknown[], options: TranslateOptions<Locales>): TranslateResult;
++    <Key extends string>(key: ResourceKeys, list: unknown[], options: TranslateOptions<Locales>): TranslateResult;
+     /**
+      * Locale message translation.
+      *
+@@ -3108,7 +3108,7 @@ export declare interface VueI18nTranslation<Messages extends Record<string, any>
+      *
+      * @VueI18nSee [Named interpolation](../guide/essentials/syntax#named-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys, named: Record<string, unknown>): TranslateResult;
++    <Key extends string>(key: ResourceKeys, named: Record<string, unknown>): TranslateResult;
+     /**
+      * Locale message translation for named interpolations and plurals
+      *
+@@ -3126,7 +3126,7 @@ export declare interface VueI18nTranslation<Messages extends Record<string, any>
+      * @VueI18nSee [Pluralization](../guide/essentials/pluralization)
+      * @VueI18nSee [Named interpolation](../guide/essentials/syntax#named-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys, named: NamedValue, plural: number): TranslateResult;
++    <Key extends string>(key: ResourceKeys, named: NamedValue, plural: number): TranslateResult;
+     /**
+      * Locale message translation for named interpolations and plurals
+      *
+@@ -3143,7 +3143,7 @@ export declare interface VueI18nTranslation<Messages extends Record<string, any>
+      *
+      * @VueI18nSee [Named interpolation](../guide/essentials/syntax#named-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys, named: NamedValue, defaultMsg: string): TranslateResult;
++    <Key extends string>(key: ResourceKeys, named: NamedValue, defaultMsg: string): TranslateResult;
+     /**
+      * Locale message translation for named interpolations
+      *
+@@ -3164,7 +3164,7 @@ export declare interface VueI18nTranslation<Messages extends Record<string, any>
+      *
+      * @VueI18nSee [Named interpolation](../guide/essentials/syntax#named-interpolation)
+      */
+-    <Key extends string>(key: Key | ResourceKeys, named: NamedValue, options: TranslateOptions<Locales>): TranslateResult;
++    <Key extends string>(key: ResourceKeys, named: NamedValue, options: TranslateOptions<Locales>): TranslateResult;
+ }
+ 
+ /** @VueI18nComposition */
+@@ -3246,7 +3246,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys
++      key: ResourceKeys
+     ): TranslateResult
+     /**
+      * Locale message translation
+@@ -3270,7 +3270,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       plural: number
+     ): TranslateResult
+     /**
+@@ -3296,7 +3296,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       plural: number,
+       options: TranslateOptions
+     ): TranslateResult
+@@ -3322,7 +3322,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       defaultMsg: string
+     ): TranslateResult
+     /**
+@@ -3348,7 +3348,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       defaultMsg: string,
+       options: TranslateOptions
+     ): TranslateResult
+@@ -3374,7 +3374,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       list: unknown[]
+     ): TranslateResult
+     /**
+@@ -3400,7 +3400,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       list: unknown[],
+       plural: number
+     ): TranslateResult
+@@ -3427,7 +3427,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       list: unknown[],
+       defaultMsg: string
+     ): TranslateResult
+@@ -3454,7 +3454,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       list: unknown[],
+       options: TranslateOptions
+     ): TranslateResult
+@@ -3480,7 +3480,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       named: NamedValue
+     ): TranslateResult
+     /**
+@@ -3506,7 +3506,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       named: NamedValue,
+       plural: number
+     ): TranslateResult
+@@ -3533,7 +3533,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       named: NamedValue,
+       defaultMsg: string
+     ): TranslateResult
+@@ -3560,7 +3560,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       named: NamedValue,
+       options: TranslateOptions
+     ): TranslateResult
+@@ -3653,7 +3653,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       locale?: Locale
+     ): boolean
+     /**
+@@ -3696,7 +3696,7 @@ declare module 'vue' {
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+       value: Value,
+-      key: Key | ResourceKeys
++      key: ResourceKeys
+     ): DateTimeFormatResult
+     /**
+      * Datetime formatting
+@@ -3723,7 +3723,7 @@ declare module 'vue' {
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+       value: Value,
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       locale: Locale
+     ): DateTimeFormatResult
+     /**
+@@ -3776,7 +3776,7 @@ declare module 'vue' {
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+       value: Value,
+-      key: Key | ResourceKeys
++      key: ResourceKeys
+     ): string
+     /**
+      * Datetime formatting
+@@ -3803,7 +3803,7 @@ declare module 'vue' {
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+       value: Value,
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       locale: Locale
+     ): string
+     /**
+@@ -3828,7 +3828,7 @@ declare module 'vue' {
+           }>
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never,
+-      OptionsType = DateTimeOptions<Key | ResourceKeys>
++      OptionsType = DateTimeOptions<ResourceKeys>
+     >(
+       value: number | Date,
+       options: OptionsType
+@@ -3872,7 +3872,7 @@ declare module 'vue' {
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+       value: number,
+-      key: Key | ResourceKeys
++      key: ResourceKeys
+     ): NumberFormatResult
+     /**
+      * Number formatting
+@@ -3898,7 +3898,7 @@ declare module 'vue' {
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+       value: number,
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       locale: Locale
+     ): NumberFormatResult
+     /**
+@@ -3986,7 +3986,7 @@ declare module 'vue' {
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+       value: number,
+-      key: Key | ResourceKeys
++      key: ResourceKeys
+     ): string
+     /**
+      * Number formatting
+@@ -4012,7 +4012,7 @@ declare module 'vue' {
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+       value: number,
+-      key: Key | ResourceKeys,
++      key: ResourceKeys,
+       locale: Locale
+     ): string
+     /**
+@@ -4036,7 +4036,7 @@ declare module 'vue' {
+           }>
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never,
+-      OptionsType = NumberOptions<Key | ResourceKeys>
++      OptionsType = NumberOptions<ResourceKeys>
+     >(
+       value: number,
+       options: OptionsType
+@@ -4068,7 +4068,7 @@ declare module 'vue' {
+         : never,
+       ResourceKeys extends Keys = IsNever<Keys> extends false ? Keys : never
+     >(
+-      key: Key | ResourceKeys
++      key: ResourceKeys
+     ): LocaleMessageValue<VueMessageType> | {}
+   }
+ }

@@ -33,8 +33,8 @@
           :theme="null"
           :class="ptClass?.toggle"
           symmetric
-          :aria-label="passwordRevealed ? 'hide password' : 'show password'"
-          :title="passwordRevealed ? 'hide password' : 'show password'"
+          :aria-label="passwordRevealed ? $t('common.hidePassword') : $t('common.showPassword')"
+          :title="passwordRevealed ? $t('common.hidePassword') : $t('common.showPassword')"
           :disabled="disabled"
           :icon="passwordRevealed ? PrimeIcons.EYE_SLASH : PrimeIcons.EYE"
           @pointerdown.prevent

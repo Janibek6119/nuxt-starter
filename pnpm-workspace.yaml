@@ -8,3 +8,6 @@ allowBuilds:
 
 catalog:
   "@types/node": "24" # to avoid updating it in package.json when updating pkgs
+
+patchedDependencies:
+  vue-i18n: patches/vue-i18n.patch

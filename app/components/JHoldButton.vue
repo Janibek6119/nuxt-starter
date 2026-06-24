@@ -73,7 +73,7 @@ watch(trulyDisabled, (nowDisabled) => {
 
 type HoldState = number | null | "done";
 const holding = ref(null as HoldState);
-const tooltip = computed(() => (holding.value === null ? "Hold" : null));
+const tooltip = computed(() => (holding.value === null ? $t("common.hold") : null));
 
 const onPointerDown = () => {
   if (trulyDisabled.value) return;

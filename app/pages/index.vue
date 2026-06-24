@@ -1,9 +1,11 @@
 <template>
   <div class="flex-stack items-center gap-4">
-    <PButton severity="secondary" @click="toggleDarkMode">Toggle Dark Mode: {{ layoutStore.darkMode }}</PButton>
-    <JTable :columns="cols" :rows="CURRENCIES" striped />
-    <JSelect v-model="currency" class="w-30" :options="CURRENCIES" :option-label="(o) => o.value" />
-    <JButton label="About" to="/about" />
+    <PButton severity="secondary" @click="toggleDarkMode">
+      {{ $t("toggleDarkMode") }}: {{ layoutStore.darkMode }}
+    </PButton>
+    <JTable :columns="cols" :rows="fmtCurrencies" striped />
+    <JSelect v-model="currency" class="w-30" :options="CURRENCIES" />
+    <JButton :label="$t('about')" to="/about" />
   </div>
 </template>
 
@@ -13,21 +15,15 @@ const toggleDarkMode = () => {
   layoutStore.darkMode = !layoutStore.darkMode;
 };
 
-const CURRENCIES = ref([
-  { label: "United States Dollar", value: "USD" },
-  { label: "Euro", value: "EUR" },
-  { label: "Japanese Yen", value: "JPY" },
-  { label: "British Pound", value: "GBP" },
-  { label: "Australian Dollar", value: "AUD" },
-  { label: "Canadian Dollar", value: "CAD" },
-  { label: "Swiss Franc", value: "CHF" },
-  { label: "Chinese Yuan", value: "CNY" },
-  { label: "Swedish Krona", value: "SEK" },
-  { label: "New Zealand Dollar", value: "NZD" },
-]);
-const cols = defineTableColumns([
-  { key: "label", header: "Name" },
-  { key: "value", header: "Ticker" },
-]);
-const currency = ref(CURRENCIES.value[0]);
+const CURRENCIES = ["USD", "EUR", "JPY", "GBP", "AUD", "CAD", "CHF", "CNY", "SEK", "NZD"] as const;
+type CurrencyType = (typeof CURRENCIES)[number];
+
+const fmtCurrencies = computed(() => CURRENCIES.map((c) => ({ label: $t(`currencies.${c}`), value: c })));
+const cols = computed(() =>
+  defineTableColumns([
+    { key: "label", header: $t("currencies.name") },
+    { key: "value", header: $t("currencies.ticker") },
+  ]),
+);
+const currency = ref<CurrencyType>(CURRENCIES[0]);
 </script>
