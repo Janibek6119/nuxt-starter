@@ -24,7 +24,7 @@ export default defineNuxtConfig({
           darkModeSelector: ".dark",
           cssLayer: {
             name: "primevue",
-            order: "theme, base, primevue", // not like in TW v3 ("tailwind-base, primevue, tailwind-utilities")
+            order: "LAYERS_PLACEHOLDER",
           },
         },
       },
@@ -37,7 +37,7 @@ export default defineNuxtConfig({
     head: {
       style: [
         {
-          innerHTML: "@layer theme, base, components, utilities;",
+          innerHTML: "@layer theme, base, primevue, components, utilities;",
           tagPriority: -10,
         },
       ],
