@@ -16,7 +16,6 @@ const toggleDarkMode = () => {
 };
 
 const CURRENCIES = ["USD", "EUR", "JPY", "GBP", "AUD", "CAD", "CHF", "CNY", "SEK", "NZD"] as const;
-type CurrencyType = (typeof CURRENCIES)[number];
 
 const fmtCurrencies = computed(() => CURRENCIES.map((c) => ({ label: $t(`currencies.${c}`), value: c })));
 const cols = computed(() =>
@@ -25,5 +24,5 @@ const cols = computed(() =>
     { key: "value", header: $t("currencies.ticker") },
   ]),
 );
-const currency = ref<CurrencyType>(CURRENCIES[0]);
+const currency = ref(CURRENCIES[0]);
 </script>
