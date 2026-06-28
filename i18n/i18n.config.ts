@@ -34,11 +34,13 @@ const MERGED = {
     NZD: ["New Zealand Dollar", "Dólar neozelandés"],
   },
 } as const satisfies GeneralMergedVocabType;
+type MergedVocabLeaf = [string, string];
+
 type GeneralMergedVocabType = {
-  [x: string]: [string, string] | GeneralMergedVocabType;
+  [x: string]: MergedVocabLeaf | GeneralMergedVocabType;
 };
 type ExtractedVocab<T> = {
-  [K in keyof T]: T[K] extends readonly [string, string] ? string : ExtractedVocab<T[K]>;
+  [K in keyof T]: T[K] extends MergedVocabLeaf ? string : ExtractedVocab<T[K]>;
 };
 const extractVocabulary = <T extends GeneralMergedVocabType>(
   obj: T,
