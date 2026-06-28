@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, type Locale } from "./const";
+import { DEFAULT_LOCALE, type Locale, LOCALES } from "./const";
 
 const MERGED = {
   _thisLanguage: ["🇬🇧 English", "🇪🇸 Español"],
@@ -34,7 +34,7 @@ const MERGED = {
     NZD: ["New Zealand Dollar", "Dólar neozelandés"],
   },
 } as const satisfies GeneralMergedVocabType;
-type MergedVocabLeaf = [string, string];
+type MergedVocabLeaf = [string, string]; // TODO what will you do when there are 20 languages?
 
 type GeneralMergedVocabType = {
   [x: string]: MergedVocabLeaf | GeneralMergedVocabType;
@@ -42,22 +42,15 @@ type GeneralMergedVocabType = {
 type ExtractedVocab<T> = {
   [K in keyof T]: T[K] extends MergedVocabLeaf ? string : ExtractedVocab<T[K]>;
 };
-const extractVocabulary = <T extends GeneralMergedVocabType>(
-  obj: T,
-  locale: keyof typeof _LOCALE_LEAF_INDEX,
-): ExtractedVocab<T> => {
+const extractVocabulary = <T extends GeneralMergedVocabType>(obj: T, locale: Locale): ExtractedVocab<T> => {
   return Object.fromEntries(
     Object.entries(obj).map(([key, value]) => [
       key,
-      Array.isArray(value) ? value[_LOCALE_LEAF_INDEX[locale]] : extractVocabulary(value, locale),
+      Array.isArray(value) ? value[LOCALES.indexOf(locale)] : extractVocabulary(value, locale),
     ]),
   ) as ExtractedVocab<T>;
 };
 
-const _LOCALE_LEAF_INDEX = {
-  en: 0,
-  es: 1,
-} satisfies { [key in Locale]: number };
 export default defineI18nConfig(() => ({
   legacy: false,
   locale: DEFAULT_LOCALE,
