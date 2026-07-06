@@ -1,6 +1,6 @@
 <template>
   <div class="flex-stack items-center gap-4">
-    <PButton severity="secondary" @click="toggleDarkMode">
+    <PButton @click="toggleDarkMode">
       {{ $t("toggleDarkMode") }}: {{ layoutStore.darkMode }}
     </PButton>
     <JTable :columns="cols" :rows="fmtCurrencies" striped />

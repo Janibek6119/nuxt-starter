@@ -45,7 +45,7 @@ export default defineNuxtConfig({
           darkModeSelector: ".dark",
           cssLayer: {
             name: "primevue",
-            order: "LAYERS_PLACEHOLDER",
+            order: "theme, base, primevue, components, utilities",
           },
         },
       },
@@ -53,15 +53,5 @@ export default defineNuxtConfig({
   },
   typescript: {
     typeCheck: true,
-  },
-  app: {
-    head: {
-      style: [
-        {
-          innerHTML: "@layer theme, base, primevue, components, utilities;",
-          tagPriority: -10,
-        },
-      ],
-    },
   },
 });

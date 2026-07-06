@@ -11,6 +11,7 @@ catalogs:
       version: 24.13.2
 
 patchedDependencies:
+  '@primevue/nuxt-module': cb0ff3fb0094bdb5e39fd755ea30702f09bd4e8d7a08e0ba51dfd20af0904e8d
   vue-i18n: 374a43f41f8ef3c95b4902e2ecc474106f9751b60b9b47ec52c971d885a26511
 
 importers:
@@ -59,7 +60,7 @@ importers:
         version: 1.16.0(@typescript-eslint/utils@8.62.0(eslint@10.5.0(jiti@2.7.0))(typescript@6.0.3))(@vue/compiler-sfc@3.5.38)(crossws@0.4.6(srvx@0.11.17))(eslint@10.5.0(jiti@2.7.0))(magicast@0.5.3)(oxc-parser@0.133.0)(typescript@6.0.3)(vite@7.3.5(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))
       '@primevue/nuxt-module':
         specifier: 4.5.5
-        version: 4.5.5(@babel/parser@7.29.7)(magicast@0.5.3)(vue@3.5.38(typescript@6.0.3))
+        version: 4.5.5(patch_hash=cb0ff3fb0094bdb5e39fd755ea30702f09bd4e8d7a08e0ba51dfd20af0904e8d)(@babel/parser@7.29.7)(magicast@0.5.3)(vue@3.5.38(typescript@6.0.3))
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.2
@@ -7299,7 +7300,7 @@ snapshots:
 
   '@primevue/metadata@4.5.5': {}
 
-  '@primevue/nuxt-module@4.5.5(@babel/parser@7.29.7)(magicast@0.5.3)(vue@3.5.38(typescript@6.0.3))':
+  '@primevue/nuxt-module@4.5.5(patch_hash=cb0ff3fb0094bdb5e39fd755ea30702f09bd4e8d7a08e0ba51dfd20af0904e8d)(@babel/parser@7.29.7)(magicast@0.5.3)(vue@3.5.38(typescript@6.0.3))':
     dependencies:
       '@nuxt/kit': 3.21.8(magicast@0.5.3)
       '@primeuix/styled': 0.7.4
