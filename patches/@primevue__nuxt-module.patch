@@ -1,5 +1,5 @@
 diff --git a/dist/module.mjs b/dist/module.mjs
-index e99943185cac5c443cc9c9effc6625db7f16b93c..063323651f7cb2f22330e32e69f6ef23b6e7a01d 100644
+index e99943185cac5c443cc9c9effc6625db7f16b93c..b9ba103976ab949e6ba29a97ef925159aad92e40 100644
 --- a/dist/module.mjs
 +++ b/dist/module.mjs
 @@ -234,6 +234,7 @@ const module = defineNuxtModule({
@@ -18,19 +18,18 @@ index e99943185cac5c443cc9c9effc6625db7f16b93c..063323651f7cb2f22330e32e69f6ef23
  const styleProps = {
      ${options?.csp?.nonce ? `nonce: ${options?.csp?.nonce}` : ""}
  }
-@@ -250,7 +250,14 @@ const styles = [
-     ${uniqueRegisteredStyles?.map((item) => `${item.as} && ${item.as}.getStyleSheet ? ${item.as}.getStyleSheet(undefined, styleProps) : ''`).join(",")}
- ].join('');
+@@ -252,6 +252,14 @@ const styles = [
  
--${hasTheme ? `Theme.setTheme(${importTheme?.as} || options?.theme)` : ""}
+ ${hasTheme ? `Theme.setTheme(${importTheme?.as} || options?.theme)` : ""}
+ 
 +${
 +  hasTheme
-+    ? `Theme.setTheme(${importTheme?.as} || options?.theme)
-+const layerOrderThemeCSS = BaseStyle.getLayerOrderThemeCSS?.() || '';
++    ? `const layerOrderThemeCSS = BaseStyle.getLayerOrderThemeCSS?.() || '';
 +const layerOrderStyle = layerOrderThemeCSS ? createStyleAsString(layerOrderThemeCSS, { 'data-primevue-style-id': 'layer-order', ...styleProps }) : '';
 +const stylesToTop = [layerOrderStyle, ${registered.injectStylesAsStringToTop.join("")}].join('');`
 +    : `const stylesToTop = [${registered.injectStylesAsStringToTop.join("")}].join('');`
 +}
- 
++
  const themes = ${!hasTheme ? `[]` : `
  [
+     ${`${uniqueRegisteredStyles?.[0].as} && ${uniqueRegisteredStyles?.[0].as}.getCommonThemeStyleSheet ? ${uniqueRegisteredStyles?.[0].as}.getCommonThemeStyleSheet(undefined, styleProps) : ''`},
