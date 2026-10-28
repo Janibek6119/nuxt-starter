@@ -20,7 +20,7 @@
           <span class="j-select__value" :class="{ 'j-select__value--placeholder': !hasValue }">
             {{ displayValue }}
           </span>
-          <i class="j-select__icon" :class="PrimeIcons.CHEVRON_DOWN" />
+          <i class="j-select__icon" :class="[PrimeIcons.CHEVRON_DOWN, { 'j-select__icon--open': isOpen }]" />
         </button>
         <Transition name="j-select-overlay">
           <div v-if="isOpen" class="j-select__overlay">
@@ -156,6 +156,10 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeydown));
     color: var(--p-form-field-icon-color);
     transition: transform 0.2s ease;
   }
+
+  .j-select__icon.j-select__icon--open {
+    transform: rotate(180deg);
+  }  
 
   .j-select__overlay {
     @apply rounded-2 absolute left-0 z-1 w-full shadow-md;

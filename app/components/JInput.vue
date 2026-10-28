@@ -1,6 +1,9 @@
 <template>
-  <div class="j-input" :class="{ 'j-input--invalid': invalid }">
-    <label v-if="label" :for="inputId" class="j-input__label" :class="ptClass?.label">{{ label }}</label>
+  <div class="j-input" :class="{ 'j-input--invalid': invalid, 'j-input--active': isActive }">
+    <label v-if="label" :for="inputId" class="j-input__label" :class="ptClass?.label">
+      {{ label }}
+      <span v-if="required" class="text-red-500">*</span>
+    </label>
     <div
       class="j-input__box"
       :class="[ptClass?.box, { 'j-input__box--actions': $slots.actions || showPasswordToggle }]"
@@ -18,6 +21,7 @@
         @beforeinput="sabotageInvalidInput"
         @input="acceptOrRevert"
         @compositionend="acceptOrRevert"
+        @focus="isFocused = true"
         @blur="onBlur"
       />
       <div v-if="$slots.actions || showPasswordToggle" class="j-input__actions" :class="ptClass?.actions">
@@ -25,7 +29,7 @@
           name="actions"
           :disabled="disabled"
           :revealed="passwordRevealed"
-          @toggle-revealed="passwordRevealed = !passwordRevealed"
+          @toggle-revealed="togglePasswordRevealed"
         />
         <JButton
           v-if="showPasswordToggle"
@@ -55,6 +59,7 @@ const props = withDefaults(
   defineProps<{
     label?: string;
     invalid?: boolean;
+    required?: boolean;
     /**
      * - `null` hides the message block
      * @default null
@@ -69,6 +74,10 @@ const props = withDefaults(
      */
     showPasswordToggle?: boolean;
     disabled?: boolean;
+    /**
+     * `true` forces the highlighted border. `false` forbids it. Omit to follow focus.
+     */
+    active?: boolean;
     ptClass?: Partial<{
       label: string;
       box: string;
@@ -88,6 +97,7 @@ const props = withDefaults(
     placeholder: undefined,
     type: "text",
     showPasswordToggle: true,
+    active: undefined,
     ptClass: undefined,
     preTransformer: (v: string) => v,
     postTransformer: (v: string) => v,
@@ -96,6 +106,8 @@ const props = withDefaults(
 );
 
 const emit = defineEmits(["blur"]);
+const isFocused = ref(false);
+const isActive = computed(() => props.active ?? isFocused.value);
 const inputId = useId();
 const modelValue = defineModel<string>({ required: true });
 const inputRef = useTemplateRef<HTMLInputElement>("inputRef");
@@ -192,6 +204,7 @@ function acceptOrRevert(event: InputEvent | CompositionEvent) {
 }
 
 function onBlur() {
+  isFocused.value = false;
   const el = inputRef.value;
   if (el) commit(el, props.blurTransformer(el.value));
   emit("blur");
@@ -251,6 +264,10 @@ function onBlur() {
   .j-input__message {
     @apply mt-1 truncate text-xs;
     color: var(--p-text-muted-color);
+  }
+
+  .j-input--active > .j-input__box {
+    border-color: var(--p-form-field-focus-border-color);
   }
 
   .j-input.j-input--invalid > .j-input__box {

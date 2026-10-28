@@ -28,7 +28,7 @@
   </table>
 </template>
 
-<script setup lang="ts" generic="TRow extends Record<string, unknown>, TKey extends string = string">
+<script setup lang="ts" generic="TRow extends object, TKey extends string = string">
 export interface JTableColumn<K extends string = string> {
   key: K;
   header?: string;
