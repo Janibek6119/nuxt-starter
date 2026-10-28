@@ -8,6 +8,7 @@ allowBuilds:
 
 catalog:
   "@types/node": "24" # to avoid updating it in package.json when updating pkgs
+  "typescript": "6"
 
 patchedDependencies:
   '@primevue/nuxt-module': patches/@primevue__nuxt-module.patch

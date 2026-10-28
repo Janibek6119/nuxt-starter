@@ -9,6 +9,9 @@ catalogs:
     '@types/node':
       specifier: '24'
       version: 24.13.2
+    typescript:
+      specifier: '6'
+      version: 6.0.3
 
 patchedDependencies:
   '@primevue/nuxt-module': 1fb990a0d871b7382a28bfa1e784007aa6d19a8ad2a1932faf2d5da620bb2d44
@@ -98,7 +101,7 @@ importers:
         specifier: 4.22.4
         version: 4.22.4
       typescript:
-        specifier: 6.0.3
+        specifier: 'catalog:'
         version: 6.0.3
       vue-eslint-parser:
         specifier: 10.4.1
