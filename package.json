@@ -12,34 +12,34 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@lucide/vue": "^1.62.0",
-    "@nuxtjs/i18n": "10.4.0",
-    "@pinia/nuxt": "0.11.3",
-    "@tailwindcss/vite": "4.3.1",
-    "@vueuse/nuxt": "14.3.0",
+    "@lucide/vue": "^1.64.0",
+    "@nuxtjs/i18n": "10.6.0",
+    "@pinia/nuxt": "1.0.3",
+    "@tailwindcss/vite": "4.3.3",
+    "@vueuse/nuxt": "15.0.0",
     "decimal.js": "10.6.0",
-    "nuxt": "4.4.8",
-    "pinia": "3.0.4",
+    "nuxt": "4.6.3",
+    "pinia": "4.1.0",
     "pinia-plugin-persistedstate": "4.7.1",
-    "tailwindcss": "4.3.1",
-    "zod": "4.4.3"
+    "tailwindcss": "4.3.3",
+    "zod": "4.6.7"
   },
   "devDependencies": {
-    "@nuxt/eslint": "1.16.0",
+    "@nuxt/eslint": "1.17.0",
     "@types/node": "catalog:",
-    "eslint": "10.5.0",
+    "eslint": "10.13.0",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-better-tailwindcss": "4.6.0",
-    "eslint-plugin-prettier": "5.5.6",
-    "prettier": "3.8.4",
-    "prettier-plugin-classnames": "0.10.2",
-    "prettier-plugin-merge": "0.10.1",
-    "prettier-plugin-tailwindcss": "0.8.0",
-    "sass-embedded": "^1.106.1",
-    "tsx": "4.22.4",
+    "eslint-plugin-better-tailwindcss": "4.10.0",
+    "eslint-plugin-prettier": "5.5.7",
+    "prettier": "3.9.10",
+    "prettier-plugin-classnames": "0.10.5",
+    "prettier-plugin-merge": "0.10.2",
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "sass-embedded": "^1.107.0",
+    "tsx": "4.23.15",
     "typescript": "catalog:",
     "vue-eslint-parser": "10.4.1",
-    "vue-tsc": "3.3.5"
+    "vue-tsc": "3.3.13"
   },
-  "packageManager": "pnpm@11.9.0"
+  "packageManager": "pnpm@12.16.1"
 }

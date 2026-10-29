@@ -22,7 +22,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
-      include: ["decimal.js"],
+      include: ["@lucide/vue", "decimal.js"],
     },
   },
   css: ["~~/app/assets/css/main.css"],
