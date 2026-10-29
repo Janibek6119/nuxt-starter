@@ -1,55 +1,56 @@
 <template>
-  <JButton
-    v-tooltip.top="trulyDisabled ? null : tooltip"
-    v-bind="{ ...$props, ...$attrs }"
-    :symmetric="!label"
-    @touchstart.prevent
-    @pointerdown="onPointerDown"
-    @pointerup="onPointerUp"
-    @pointerleave="onPointerLeave"
-  >
-    <span class="flex-center size-4.5">
-      <i v-if="loading" :class="PrimeIcons.SPINNER" class="size-4 animate-spin" />
-      <template v-else-if="icon">
-        <i v-if="holding === null" :class="icon" />
-        <svg
-          v-else-if="typeof holding === 'number'"
-          class="j-completion-circle"
-          viewBox="0 0 36 36"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <circle class="j-completion-circle__track" cx="18" cy="18" r="15" fill="none" />
-          <circle class="j-completion-circle__arc" cx="18" cy="18" r="15" fill="none" />
-        </svg>
-      </template>
-      <template v-else>
-        <svg
-          v-if="holding === null || typeof holding === 'number'"
-          class="j-completion-circle"
-          viewBox="0 0 36 36"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <circle class="j-completion-circle__track" cx="18" cy="18" r="15" fill="none" />
-          <circle
-            v-if="typeof holding === 'number'"
-            class="j-completion-circle__arc"
-            cx="18"
-            cy="18"
-            r="15"
-            fill="none"
-          />
-        </svg>
-      </template>
-      <i v-if="holding === 'done'" :class="PrimeIcons.CHECK_CIRCLE" />
-    </span>
-    <span v-if="label" class="j-button__label">{{ label }}</span>
-  </JButton>
+  <JTooltip :text="trulyDisabled ? null : tooltip">
+    <JButton
+      v-bind="{ ...$props, ...$attrs }"
+      :symmetric="!label"
+      @touchstart.prevent
+      @pointerdown="onPointerDown"
+      @pointerup="onPointerUp"
+      @pointerleave="onPointerLeave"
+    >
+      <span class="flex-center size-4.5">
+        <Loader2 v-if="loading" class="animate-spin" />
+        <template v-else-if="icon">
+          <i v-if="holding === null" :class="icon" />
+          <svg
+            v-else-if="typeof holding === 'number'"
+            class="j-completion-circle"
+            viewBox="0 0 36 36"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <circle class="j-completion-circle__track" cx="18" cy="18" r="15" fill="none" />
+            <circle class="j-completion-circle__arc" cx="18" cy="18" r="15" fill="none" />
+          </svg>
+        </template>
+        <template v-else>
+          <svg
+            v-if="holding === null || typeof holding === 'number'"
+            class="j-completion-circle"
+            viewBox="0 0 36 36"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <circle class="j-completion-circle__track" cx="18" cy="18" r="15" fill="none" />
+            <circle
+              v-if="typeof holding === 'number'"
+              class="j-completion-circle__arc"
+              cx="18"
+              cy="18"
+              r="15"
+              fill="none"
+            />
+          </svg>
+        </template>
+        <CheckCircle v-if="holding === 'done'" />
+      </span>
+      <span v-if="label" class="j-button__label">{{ label }}</span>
+    </JButton>
+  </JTooltip>
 </template>
 
 <script setup lang="ts">
-import { PrimeIcons } from "@primevue/core/api";
+import { CheckCircle, Loader2 } from "@lucide/vue";
 import type { JButtonProps } from "~/components/JButton.vue";
 
 const emit = defineEmits<{

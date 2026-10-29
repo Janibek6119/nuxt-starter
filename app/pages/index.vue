@@ -1,8 +1,6 @@
 <template>
   <div class="flex-stack items-center gap-4">
-    <PButton @click="toggleDarkMode">
-      {{ $t("toggleDarkMode") }}: {{ layoutStore.darkMode }}
-    </PButton>
+    <JButton theme="secondary" @click="toggleDarkMode">{{ $t("toggleDarkMode") }}: {{ layoutStore.darkMode }}</JButton>
     <JTable :columns="cols" :rows="fmtCurrencies" striped />
     <JSelect v-model="currency" class="w-30" :options="CURRENCIES" />
     <JButton :label="$t('about')" to="/about" />

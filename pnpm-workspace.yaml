@@ -1,6 +1,3 @@
-publicHoistPattern:
-  - "@primevue/core"
-
 allowBuilds:
   "@parcel/watcher": true
   esbuild: true
@@ -11,5 +8,4 @@ catalog:
   "typescript": "6"
 
 patchedDependencies:
-  '@primevue/nuxt-module': patches/@primevue__nuxt-module.patch
   vue-i18n: patches/vue-i18n.patch

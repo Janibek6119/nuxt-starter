@@ -4,7 +4,11 @@
     class="j-button"
     :class="{
       'j-button--unstyled': theme === null,
-      'j-button--default': theme === 'default',
+      'j-button--primary': theme === 'primary',
+      'j-button--secondary': theme === 'secondary',
+      'j-button--info': theme === 'info',
+      'j-button--warning': theme === 'warning',
+      'j-button--error': theme === 'error',
       'j-button--size-small': size === 'small',
       'j-button--size-default': size === 'default',
       'j-button--disabled-dimmed': disabledDimmed,
@@ -20,8 +24,8 @@
     :to="disabled || loading ? undefined : to"
   >
     <slot>
-      <i v-if="loading" :class="PrimeIcons.SPINNER" class="j-button__icon animate-spin" />
-      <i v-else-if="icon" class="j-button__icon" :class="icon" />
+      <Loader2 v-if="loading" class="j-button__icon animate-spin" />
+      <component :is="icon" v-else-if="icon" class="j-button__icon" />
       <span v-if="label" class="j-button__label">{{ label }}</span>
     </slot>
   </NuxtLink>
@@ -30,7 +34,11 @@
     class="j-button"
     :class="{
       'j-button--unstyled': theme === null,
-      'j-button--default': theme === 'default',
+      'j-button--primary': theme === 'primary',
+      'j-button--secondary': theme === 'secondary',
+      'j-button--info': theme === 'info',
+      'j-button--warning': theme === 'warning',
+      'j-button--error': theme === 'error',
       'j-button--size-small': size === 'small',
       'j-button--size-default': size === 'default',
       'j-button--disabled-dimmed': disabledDimmed,
@@ -47,27 +55,29 @@
     @click="onClick"
   >
     <slot>
-      <i v-if="loading" :class="PrimeIcons.SPINNER" class="j-button__icon animate-spin" />
-      <i v-else-if="icon" class="j-button__icon" :class="icon" />
+      <Loader2 v-if="loading" class="j-button__icon animate-spin" />
+      <component :is="icon" v-else-if="icon" class="j-button__icon" />
       <span v-if="label" class="j-button__label">{{ label }}</span>
     </slot>
   </button>
 </template>
 
 <script setup lang="ts">
-import { PrimeIcons } from "@primevue/core/api";
+import { type LucideIcon, Loader2 } from "@lucide/vue";
 const VISIBLY_DISABLED_WHEN_LOADING = false;
 export type JButtonProps = {
   label?: string;
-  icon?: (typeof PrimeIcons)[keyof typeof PrimeIcons];
+  icon?: LucideIcon;
   disabled?: boolean;
   /** @default true */
   disabledDimmed?: boolean;
-  theme?: null | "default";
+  theme?: null | "primary" | "secondary" | "info" | "warning" | "error";
   to?: string;
   iconPos?: "left" | "right";
   type?: "submit" | "reset" | "button";
   loading?: boolean;
+  outlined?: boolean;
+  size?: "small" | "default";
   /**
    * @default true // IF NO LABEL PRESENT
    */
@@ -77,11 +87,13 @@ export type JButtonProps = {
 const props = withDefaults(defineProps<JButtonProps>(), {
   label: undefined,
   icon: undefined,
-  theme: "default",
+  theme: "primary",
   disabledDimmed: true,
   to: undefined,
   iconPos: "left",
   type: "button",
+  outlined: false,
+  size: "default",
   symmetric: undefined, // keep it, otherwise it becomes `false`
 });
 
@@ -154,29 +166,45 @@ const onClick = (e: PointerEvent) => {
         padding: 6px;
       }
     }
-    &.j-button--default {
-      --btn-palette: var(--color-temp);
+    &.j-button--primary {
+      --btn-palette: var(--color-primary);
+    }
+    &.j-button--secondary {
+      --btn-palette: var(--color-secondary);
+    }
+    &.j-button--info {
+      --btn-palette: var(--color-info);
+    }
+    &.j-button--warning {
+      --btn-palette: var(--color-warning);
+    }
+    &.j-button--error {
+      --btn-palette: var(--color-error);
     }
     &:not(.j-button--unstyled) {
       &:not(.j-button--outlined) {
         color: white;
         background-color: var(--btn-palette);
-        &:hover {
-          background-color: color-mix(in srgb, var(--btn-palette), white 8%);
-        }
-        &:active {
-          background-color: color-mix(in srgb, var(--btn-palette), white 16%);
+        &:not(.j-button--loading):not(.j-button--disabled) {
+          &:hover {
+            background-color: color-mix(in srgb, var(--btn-palette), white 8%);
+          }
+          &:active {
+            background-color: color-mix(in srgb, var(--btn-palette), white 16%);
+          }
         }
       }
       &.j-button--outlined {
         color: var(--btn-palette);
         background-color: transparent;
         border: 1px solid color-mix(in srgb, transparent, var(--btn-palette) 50%);
-        &:hover {
-          background-color: color-mix(in srgb, transparent, var(--btn-palette) 6%);
-        }
-        &:active {
-          background-color: color-mix(in srgb, transparent, var(--btn-palette) 12%);
+        &:not(.j-button--loading):not(.j-button--disabled) {
+          &:hover {
+            background-color: color-mix(in srgb, transparent, var(--btn-palette) 6%);
+          }
+          &:active {
+            background-color: color-mix(in srgb, transparent, var(--btn-palette) 12%);
+          }
         }
       }
     }

@@ -2,12 +2,12 @@
   <div class="flex-stack items-center gap-4">
     <h1>{{ $t("about") }}</h1>
     <JHoldButton :loading="running" @click="onClickRun" />
-    <JButton :icon="PrimeIcons.PLAY" :loading="running" @click="onClickRun" />
-    <PButton severity="info" :label="$t('clickMe', { count })" :disabled="loading" @click="count++" />
-    <PButton
-      severity="success"
+    <JButton :icon="Play" :loading="running" @click="onClickRun" />
+    <JButton theme="info" :label="$t('clickMe', { count })" :disabled="loading" @click="count++" />
+    <JButton
+      theme="secondary"
       :label="$t('common.submit')"
-      :disabled="loading || !count"
+      :disabled="!count"
       :loading="loading"
       @click="onSubmitFake"
     />
@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { PrimeIcons } from "@primevue/core/api";
+import { Play } from "@lucide/vue";
 
 const count = ref(0);
 const loading = ref(false);
@@ -38,12 +38,12 @@ const onSubmitFake = () => {
   const currentCount = count.value;
   setTimeout(() => {
     loading.value = false;
-    toast.add({
-      severity: "success",
-      summary: "Success",
-      detail: $t("dataSubmittedSuccessfully", { count: currentCount }),
-      life: 3000,
-    });
+    // toast.add({
+    //   severity: "success",
+    //   summary: "Success",
+    //   detail: $t("dataSubmittedSuccessfully", { count: currentCount }),
+    //   life: 3000,
+    // });
     count.value = 0;
   }, 1000);
 };

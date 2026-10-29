@@ -2,14 +2,14 @@
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
-  <PToast />
+  <JToast />
 </template>
 
 <script setup lang="ts">
 const layoutStore = useLayoutStore();
 useHead({
   htmlAttrs: {
-    class: layoutStore.darkMode ? "dark" : "",
+    class: computed(() => (layoutStore.darkMode ? "dark" : "")),
   },
 });
 </script>

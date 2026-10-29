@@ -40,7 +40,7 @@
           :aria-label="passwordRevealed ? $t('common.hidePassword') : $t('common.showPassword')"
           :title="passwordRevealed ? $t('common.hidePassword') : $t('common.showPassword')"
           :disabled="disabled"
-          :icon="passwordRevealed ? PrimeIcons.EYE_SLASH : PrimeIcons.EYE"
+          :icon="passwordRevealed ? EyeOff : Eye"
           @pointerdown.prevent
           @click="togglePasswordRevealed"
         />
@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { PrimeIcons } from "@primevue/core/api";
+import { Eye, EyeOff } from "@lucide/vue";
 
 const props = withDefaults(
   defineProps<{
@@ -220,33 +220,33 @@ function onBlur() {
 
   .j-input__label {
     @apply mb-2 truncate;
-    color: var(--p-form-field-float-label-color);
+    color: var(--color-secondary);
   }
 
   .j-input__box {
     @apply flex-center rounded-2 overflow-hidden;
-    transition-duration: var(--p-form-field-transition-duration);
-    border: 1px solid var(--p-form-field-border-color);
-    background: var(--p-form-field-background);
+    transition-duration: 0.2s;
+    border: 1px solid color-mix(in srgb, var(--color-background), var(--color-foreground) 16%);
+    background: var(--color-background);
   }
   .j-input__box:hover {
-    border-color: var(--p-form-field-hover-border-color);
+    border-color: color-mix(in srgb, var(--color-background), var(--color-foreground) 36%);
   }
   .j-input__box:focus-within {
-    border-color: var(--p-form-field-focus-border-color);
+    border-color: var(--color-primary);
   }
 
   .j-input__input {
     @apply grow;
-    background: var(--p-form-field-background);
+    background: var(--color-background);
     color: currentColor;
-    caret-color: var(--p-form-field-color);
+    caret-color: var(--color-foreground);
     min-width: 0;
     outline: none;
     padding: 8.5px 16px;
   }
   .j-input__input::placeholder {
-    color: var(--p-form-field-placeholder-color);
+    color: var(--color-secondary);
   }
   .j-input__box.j-input__box--actions > .j-input__input {
     @apply pr-0;
@@ -258,32 +258,32 @@ function onBlur() {
 
   .j-input__toggle {
     @apply size-9.5;
-    color: var(--p-form-field-icon-color);
+    color: var(--color-secondary);
   }
 
   .j-input__message {
     @apply mt-1 truncate text-xs;
-    color: var(--p-text-muted-color);
+    color: var(--color-secondary);
   }
 
   .j-input--active > .j-input__box {
-    border-color: var(--p-form-field-focus-border-color);
+    border-color: var(--color-primary);
   }
 
   .j-input.j-input--invalid > .j-input__box {
-    border-color: var(--p-form-field-invalid-border-color);
+    border-color: var(--color-error);
   }
 
   .j-input.j-input--invalid > .j-input__box > .j-input__input {
-    color: var(--p-form-field-invalid-color);
+    color: var(--color-error);
   }
 
   .j-input.j-input--invalid > .j-input__box > .j-input__input::placeholder {
-    color: var(--p-form-field-invalid-placeholder-color);
+    color: color-mix(in srgb, var(--color-background), var(--color-error) 55%);
   }
 
   .j-input.j-input--invalid > .j-input__message {
-    color: var(--p-form-field-invalid-color);
+    color: var(--color-error);
   }
 }
 </style>

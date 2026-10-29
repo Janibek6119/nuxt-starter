@@ -20,7 +20,7 @@
           <span class="j-select__value" :class="{ 'j-select__value--placeholder': !hasValue }">
             {{ displayValue }}
           </span>
-          <i class="j-select__icon" :class="[PrimeIcons.CHEVRON_DOWN, { 'j-select__icon--open': isOpen }]" />
+          <ChevronDown class="j-select__icon" :class="{ 'j-select__icon--open': isOpen }" />
         </button>
         <Transition name="j-select-overlay">
           <div v-if="isOpen" class="j-select__overlay">
@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts" generic="T">
-import { PrimeIcons } from "@primevue/core/api";
+import { ChevronDown } from "@lucide/vue";
 
 const props = withDefaults(
   defineProps<{
@@ -111,7 +111,7 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeydown));
   }
 
   label {
-    color: var(--p-form-field-float-label-color);
+    color: var(--color-secondary);
   }
 
   .j-select__container {
@@ -124,21 +124,21 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeydown));
 
   .j-select__box {
     @apply flex-stream rounded-2 w-full gap-4;
-    background: var(--p-form-field-background);
-    border: 1px solid var(--p-form-field-border-color);
-    color: var(--p-form-field-color);
-    transition-duration: var(--p-form-field-transition-duration);
+    background: var(--color-background);
+    border: 1px solid color-mix(in srgb, var(--color-background), var(--color-foreground) 16%);
+    color: var(--color-foreground);
+    transition-duration: 0.2s;
     cursor: pointer;
     outline: none;
     padding: 8.5px 16px;
   }
 
   .j-select__box:hover {
-    border-color: var(--p-form-field-hover-border-color);
+    border-color: color-mix(in srgb, var(--color-background), var(--color-foreground) 36%);
   }
 
   .j-select__box:focus {
-    border-color: var(--p-form-field-focus-border-color);
+    border-color: var(--color-primary);
   }
 
   .j-select__value {
@@ -148,24 +148,24 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeydown));
   }
 
   .j-select__value.j-select__value--placeholder {
-    color: var(--p-form-field-placeholder-color);
+    color: var(--color-secondary);
   }
 
   .j-select__icon {
     @apply shrink-0;
-    color: var(--p-form-field-icon-color);
+    color: var(--color-secondary);
     transition: transform 0.2s ease;
   }
 
   .j-select__icon.j-select__icon--open {
     transform: rotate(180deg);
-  }  
+  }
 
   .j-select__overlay {
     @apply rounded-2 absolute left-0 z-1 w-full shadow-md;
-    background: var(--p-select-overlay-background);
-    color: var(--p-select-overlay-color);
-    border: 1px solid var(--p-select-overlay-border-color);
+    background: color-mix(in srgb, var(--color-background), var(--color-foreground) 4%);
+    color: var(--color-foreground);
+    border: 1px solid color-mix(in srgb, var(--color-background), var(--color-foreground) 16%);
     top: calc(100% + 4px);
     overflow: hidden;
   }
@@ -179,57 +179,57 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeydown));
 
   .j-select__option {
     @apply rounded-1 shrink-0;
-    background: var(--p-select-option-background);
-    color: var(--p-select-option-color);
+    background: transparent;
+    color: var(--color-foreground);
     cursor: pointer;
     padding: 8px 16px;
     transition: background-color 0.2s ease;
   }
 
   .j-select__option:hover {
-    background: var(--p-select-option-focus-background);
-    color: var(--p-select-option-focus-color);
+    background: color-mix(in srgb, transparent, var(--color-foreground) 8%);
+    color: var(--color-foreground);
   }
 
   .j-select__option.j-select__option--selected {
-    background: var(--p-select-option-selected-background);
-    color: var(--p-select-option-selected-color);
+    background: color-mix(in srgb, transparent, var(--color-primary) 16%);
+    color: var(--color-primary);
   }
   .j-select__option.j-select__option--selected:hover {
-    background: var(--p-select-option-selected-focus-background);
-    color: var(--p-select-option-selected-focus-color);
+    background: color-mix(in srgb, transparent, var(--color-primary) 26%);
+    color: var(--color-primary);
   }
 
   .j-select__field.j-select__field--open > .j-select__box {
-    border-color: var(--p-form-field-focus-border-color);
+    border-color: var(--color-primary);
   }
 
   .j-select__field.j-select__field--disabled > .j-select__box {
-    color: var(--p-form-field-disabled-color);
+    color: var(--color-secondary);
     cursor: default;
     opacity: 0.6;
   }
 
   .j-select__message {
-    color: var(--p-text-muted-color);
+    color: var(--color-secondary);
     font-size: 12px;
     line-height: 16px;
   }
 
   .j-select__container.j-select__container--invalid > .j-select__field > .j-select__box {
     /* @apply border-red-500 text-red-500; */
-    border-color: var(--p-form-field-invalid-border-color);
+    border-color: var(--color-error);
   }
 
   .j-select__container.j-select__container--invalid
     > .j-select__field
     > .j-select__box
     > .j-select__value--placeholder {
-    color: var(--p-form-field-invalid-placeholder-color);
+    color: color-mix(in srgb, var(--color-background), var(--color-error) 55%);
   }
 
   .j-select__container.j-select__container--invalid > .j-select__message {
-    color: var(--p-form-field-float-label-invalid-color);
+    color: var(--color-error);
   }
 
   .j-select-overlay-enter-active,

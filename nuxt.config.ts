@@ -1,17 +1,9 @@
-import Aura from "@primeuix/themes/aura";
 import tailwindcss from "@tailwindcss/vite";
 import { DEFAULT_LOCALE, LOCALES } from "./i18n/const";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: [
-    "@nuxt/eslint",
-    "@primevue/nuxt-module",
-    "@pinia/nuxt",
-    "@vueuse/nuxt",
-    "@nuxtjs/i18n",
-    "pinia-plugin-persistedstate/nuxt",
-  ],
+  modules: ["@nuxt/eslint", "@pinia/nuxt", "@vueuse/nuxt", "@nuxtjs/i18n", "pinia-plugin-persistedstate/nuxt"],
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   i18n: {
@@ -30,25 +22,18 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
-      include: ["@primevue/core/api"],
+      include: ["decimal.js"],
     },
   },
   css: ["~~/app/assets/css/main.css"],
-  primevue: {
-    components: {
-      prefix: "P",
-    },
-    options: {
-      theme: {
-        preset: Aura,
-        options: {
-          darkModeSelector: ".dark",
-          cssLayer: {
-            name: "primevue",
-            order: "theme, base, primevue, components, utilities",
-          },
+  app: {
+    head: {
+      style: [
+        {
+          innerHTML: "@layer theme, base, components, utilities;",
+          tagPriority: -10,
         },
-      },
+      ],
     },
   },
   typescript: {
